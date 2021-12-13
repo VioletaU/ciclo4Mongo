@@ -44,11 +44,17 @@ public class CookwareService {
                 if (cookware.getReference() != null) {
                     cookwareDb.get().setReference(cookware.getReference());
                 }
+                if (cookware.getBrand()!= null) {
+                    cookwareDb.get().setBrand(cookware.getBrand());
+                }
                 if (cookware.getCategory() != null) {
                     cookwareDb.get().setCategory(cookware.getCategory());
                 }
-                if (cookware.getSize() != null) {
-                    cookwareDb.get().setSize(cookware.getSize());
+                if (cookware.getMateriales()!= null) {
+                    cookwareDb.get().setMateriales(cookware.getMateriales());
+                } 
+                if (cookware.getDimensiones()!= null) {
+                    cookwareDb.get().setDimensiones(cookware.getDimensiones());
                 }
                 if (cookware.getDescription() != null) {
                     cookwareDb.get().setDescription(cookware.getDescription());
