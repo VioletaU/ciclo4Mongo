@@ -24,8 +24,8 @@ public class CookwareRepository {
     public List<Cookware> getAll() {
         return cookwareInterface.findAll();
     }
-    public List<Cookware> getCookwarePrice(String price) {
-        return cookwareInterface.findByPrice(price);
+    public List<Cookware> getCookwarePrice(double price) {
+        return cookwareInterface.findByPriceLessThanEqual(price);
     }
 
     public List<Cookware> getCookwareDescription(String description) {

@@ -28,7 +28,7 @@ public class CookwareService {
     public Optional<Cookware> getClothe(String reference) {
         return cookwareRepository.getClothe(reference);
     }
-    public List<Cookware> getCookwarePrice(String price) {
+    public List<Cookware> getCookwarePrice(double price) {
         return cookwareRepository.getCookwarePrice(price);
     }
 

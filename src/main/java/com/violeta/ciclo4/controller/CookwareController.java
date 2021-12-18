@@ -44,7 +44,7 @@ public class CookwareController {
     }
 
     @GetMapping("/price/{price}")
-    public List<Cookware> getCookwarePrice(@PathVariable("price") String price) {
+    public List<Cookware> getCookwarePrice(@PathVariable("price") double price) {
         return cookwareService.getCookwarePrice(price);
     }
 

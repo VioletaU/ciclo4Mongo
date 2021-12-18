@@ -40,8 +40,8 @@ public class UserRepository {
         return userCrudRepository.findById(id);
     }
 
-    public List<User> getUseBirthday(String month) {
-        return userCrudRepository.findByMonthBirthtDay(month);
+    public List<User> birthtDayList(String monthBirthtDay) {
+        return userCrudRepository.findByMonthBirthtDay(monthBirthtDay);
     }
 
     public User create(User user) {

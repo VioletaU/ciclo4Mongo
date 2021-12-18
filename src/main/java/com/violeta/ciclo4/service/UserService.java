@@ -30,8 +30,8 @@ public class UserService {
         return userRepository.getUser(id);
     }
 
-    public List<User> getUseBirthday(String month) {
-        return userRepository.getUseBirthday(month);
+    public List<User> birthtDayList(String monthBirthtDay) {
+        return userRepository.birthtDayList(monthBirthtDay);
     }
 
     public User create(User user) {
