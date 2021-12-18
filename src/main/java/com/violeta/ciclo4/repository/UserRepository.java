@@ -41,14 +41,7 @@ public class UserRepository {
     }
 
     public List<User> getUseBirthday(String month) {
-
-        Query query = new Query();
-        Criteria dateCriteria = Criteria.where("registerDay")
-                .gte(month(month));
-        query.addCriteria(dateCriteria);
-        List<User> users = mongoTemplate.find(query, User.class);
-
-        return users;
+        return userCrudRepository.findByMonthBirthtDay(month);
     }
 
     public User create(User user) {
