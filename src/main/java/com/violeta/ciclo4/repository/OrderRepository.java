@@ -6,10 +6,14 @@ package com.violeta.ciclo4.repository;
 
 import com.violeta.ciclo4.interfaces.OrderInterface;
 import com.violeta.ciclo4.model.Order;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,6 +25,9 @@ public class OrderRepository {
 
     @Autowired
     private OrderInterface orderInterface;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<Order> getAll() {
         return (List<Order>) orderInterface.findAll();
@@ -58,7 +65,17 @@ public class OrderRepository {
         return orderInterface.findByStatusSalesManId(status, id);
     }
 
-    public List<Order> findByDateSalesManId(Date date, int id) {
-        return orderInterface.findByDateSalesManId(date, id);
+    public List<Order> findByDateSalesManId(String date, int id) {
+        DateTimeFormatter dft = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Query query = new Query();
+        Criteria dateCriteria = Criteria.where("registerDay")
+                .gte(LocalDate.parse(date, dft).minusDays(1).atStartOfDay())
+                .lt(LocalDate.parse(date, dft).plusDays(2).atStartOfDay())
+                .and("salesMan.id").is(id);
+        query.addCriteria(dateCriteria);
+        List<Order> orders = mongoTemplate.find(query, Order.class);
+
+        return orders;
     }
 }

@@ -45,9 +45,8 @@ public class OrderService {
         return orderRepository.findByStatusSalesManId(status, id);
     }
 
-    public List<Order> findByDateSalesManId(String dateStr, int id) throws ParseException {
-        Date date = ParseFecha(dateStr);
-        return orderRepository.findByDateSalesManId(date, id);
+    public List<Order> findByDateSalesManId(String dateStr, int id) {
+        return orderRepository.findByDateSalesManId(dateStr, id);
     }
 
     public Order create(Order order) {
@@ -91,14 +90,4 @@ public class OrderService {
         return del;
     }
 
-    public static Date ParseFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaDate = null;
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-        return fechaDate;
-    }
 }

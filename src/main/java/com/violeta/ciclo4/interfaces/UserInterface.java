@@ -5,6 +5,7 @@
 package com.violeta.ciclo4.interfaces;
 
 import com.violeta.ciclo4.model.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -17,6 +18,10 @@ public interface UserInterface extends MongoRepository<User, Integer> {
     Optional<User> findByEmail(String email);
 
     Optional<User> findByEmailAndPassword(String email, String password);
+
+    List<User> findByMonthBirthtDay(String monthBirthtDay);
+
+    List<User> findOneByOrderByIdDesc();
 
     Optional<User> findTopByOrderByIdDesc();
 }
