@@ -26,8 +26,8 @@ public class Ciclo4Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /* cookwareInterface.deleteAll();
+        cookwareInterface.deleteAll();
         userInterface.deleteAll();
-        orderInterface.deleteAll(); */
+        orderInterface.deleteAll();
     }
 }
