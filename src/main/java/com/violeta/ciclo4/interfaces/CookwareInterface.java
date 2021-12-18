@@ -5,7 +5,9 @@
 package com.violeta.ciclo4.interfaces;
 
 import com.violeta.ciclo4.model.Cookware;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -13,4 +15,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CookwareInterface extends MongoRepository<Cookware, String> {
 
+    @Query("{'price': ?0}")
+    public List<Cookware> findByPrice(final String price);
+
+    @Query("{'description': ?0}")
+    public List<Cookware> findByDescription(final String description);
 }

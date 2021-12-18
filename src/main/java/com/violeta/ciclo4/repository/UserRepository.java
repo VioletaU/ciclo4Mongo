@@ -5,10 +5,18 @@
 package com.violeta.ciclo4.repository;
 
 import com.violeta.ciclo4.interfaces.UserInterface;
+import com.violeta.ciclo4.model.Order;
 import com.violeta.ciclo4.model.User;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import static org.springframework.data.mongodb.core.aggregation.DateOperators.Month.month;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,12 +29,26 @@ public class UserRepository {
     @Autowired
     private UserInterface userCrudRepository;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     public List<User> getAll() {
         return (List<User>) userCrudRepository.findAll();
     }
 
     public Optional<User> getUser(int id) {
         return userCrudRepository.findById(id);
+    }
+
+    public List<User> getUseBirthday(String month) {
+
+        Query query = new Query();
+        Criteria dateCriteria = Criteria.where("registerDay")
+                .gte(month(month));
+        query.addCriteria(dateCriteria);
+        List<User> users = mongoTemplate.find(query, User.class);
+
+        return users;
     }
 
     public User create(User user) {
@@ -54,4 +76,5 @@ public class UserRepository {
     public Optional<User> lasUserId() {
         return userCrudRepository.findTopByOrderByIdDesc();
     }
+
 }

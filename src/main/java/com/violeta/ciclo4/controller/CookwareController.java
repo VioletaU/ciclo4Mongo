@@ -43,6 +43,16 @@ public class CookwareController {
         return cookwareService.getClothe(reference);
     }
 
+    @GetMapping("/price/{price}")
+    public List<Cookware> getCookwarePrice(@PathVariable("price") String price) {
+        return cookwareService.getCookwarePrice(price);
+    }
+
+    @GetMapping("/description/{description}")
+    public List<Cookware> getCookwareDescription(@PathVariable("description") String description) {
+        return cookwareService.getCookwareDescription(description);
+    }
+
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Cookware create(@RequestBody Cookware gadget) {

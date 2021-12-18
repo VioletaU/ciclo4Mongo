@@ -43,6 +43,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/birthday/{day}")
+    public List<User> getUseBirthday(@PathVariable("day") String month) {
+        return userService.getUseBirthday(month);
+    }
+
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody User user) {

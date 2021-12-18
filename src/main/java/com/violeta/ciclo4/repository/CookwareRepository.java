@@ -24,7 +24,13 @@ public class CookwareRepository {
     public List<Cookware> getAll() {
         return cookwareInterface.findAll();
     }
+    public List<Cookware> getCookwarePrice(String price) {
+        return cookwareInterface.findByPrice(price);
+    }
 
+    public List<Cookware> getCookwareDescription(String description) {
+        return cookwareInterface.findByDescription(description);
+    }
     public Optional<Cookware> getClothe(String reference) {
         return cookwareInterface.findById(reference);
     }
@@ -40,4 +46,6 @@ public class CookwareRepository {
     public void delete(Cookware cookware) {
         cookwareInterface.delete(cookware);
     }
+
+
 }

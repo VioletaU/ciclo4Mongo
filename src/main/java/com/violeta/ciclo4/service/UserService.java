@@ -30,16 +30,20 @@ public class UserService {
         return userRepository.getUser(id);
     }
 
+    public List<User> getUseBirthday(String month) {
+        return userRepository.getUseBirthday(month);
+    }
+
     public User create(User user) {
 
         Optional<User> userIdMaximo = userRepository.lasUserId();
 
         if (user.getId() == null) {
             user.setId(userIdMaximo.isEmpty() ? 1 : userIdMaximo.get().getId() + 1);
-        } 
-        
-        Optional<User> e = userRepository.getUser(user.getId());        
-        
+        }
+
+        Optional<User> e = userRepository.getUser(user.getId());
+
         if (e.isEmpty()) {
             if (emailExists(user.getEmail()) == false) {
                 return userRepository.create(user);
@@ -49,7 +53,7 @@ public class UserService {
         } else {
             return user;
         }
-        
+
     }
 
     public User update(User user) {
@@ -116,4 +120,5 @@ public class UserService {
             return usuario.get();
         }
     }
+
 }
