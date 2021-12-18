@@ -15,9 +15,9 @@ import org.springframework.data.mongodb.repository.Query;
  */
 public interface CookwareInterface extends MongoRepository<Cookware, String> {
 
-    @Query("{'price': ?0}")
+    @Query("{'price': {$lt:?0}}")
     public List<Cookware> findByPrice(final String price);
 
-    @Query("{'description': ?0}")
+    @Query("{'description': {$regex: ?0, $options: 'i'}}")
     public List<Cookware> findByDescription(final String description);
 }
